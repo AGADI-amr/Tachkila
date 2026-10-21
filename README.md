@@ -11,3 +11,5 @@ Tachkila is a web application designed to help football coaches manage their tea
 - **CSS Grid:** Designing a football field with 11 positions in a 4-4-2 formation.
 - **Tailwind CSS:** Building a responsive and user-friendly interface.
 - **Problem-Solving:** Applying business rules to ensure player-position compatibility and prevent invalid assignments.
+
+Plannification : https://aamr-el-gadiri.atlassian.net/jira/software/projects/KAN/boards/1?filter=assignee+IN+%28712020%3A18100bef-5c76-4c83-b846-e73c0771e0aa%2C+empty%29&groupBy=none&atlOrigin=eyJpIjoiODk1Zjk0NzM1ZWQyNGM5ZWEwZjI3OWYxOGFmODQ1NjgiLCJwIjoiaiJ9
