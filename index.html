@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Créez et gérez vos compositions d'équipe facilement sur Tachkila. Organisez votre effectif, placez vos joueurs en 4-4-2 sur un terrain virtuel et partagez votre tactique.">
     <title>Tachkila - Créez et Gérez votre Composition d'Équipe de Foot</title>
+    <link rel="stylesheet" href="css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body>
-    <header class="flex items-center justify-between px-4 py-4 bg-teal-950" >
+    <header class="flex items-center justify-between px-4 py-4 bg-cyan-900" >
         <div class="flex items-center gap-3">
         <img src="assets/football.png" alt="Football Icon" class="h-8 w-8 object-contain shrink-0"/>
         <span class="font-bold text-lime-400 tracking-wide uppercase">TACHKILA</span>
@@ -38,34 +40,107 @@
         <span class="text-white border-2 border-blue-500 rounded-lg bg-slate-900 p-1">4-4-2</span>
         </div>
     </header>
-    <main>
-        <aside class="flex-row bg-teal-900 h-[500px] w-[300px]">
+    <div class="flex min-h-screen">
+
+        <aside class="flex-row bg-sky-950 h-screen w-[300px]">
         <button type="button" class="bg-blue-600
         text-white rounded-lg px-4 text-center py-2 h-[60px] w-[280px]
         text-base font-semibold my-4 mx-2">+ Ajouter un joueur</button>
         <div class="flex justify-between m-[10px] items-center">
-            <h3 class="text-white font-bold">Effectif</h3> 
+            <h3 class="text-white font-bold">Effectif</h3>
             <div class="border-[1px] border-teal-900 bg-teal-950 text-white rounded-lg p-1.5 text-sm">
                 <span>1</span><span> joueur(s)</span>
             </div>
         </div>
-        <p></p>
         </aside>
-        <section>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </section>
-    </main>
+
+        <main class="flex justify-center items-center flex-1 bg-slate-900">
+            <section>
+
+                <div class="gb border-2 border-amber-400 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-amber-400">GB</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+
+                <div class="dc1 border-2 border-blue-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-blue-600">DC</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+
+                <div class="dc2 border-2 border-blue-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-blue-600">DC</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="dg border-2 border-blue-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-blue-600">DG</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="dd border-2 border-blue-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-blue-600">DD</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="mg border-2 border-green-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-green-600">MG</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="mc1 border-2 border-green-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-green-600">MC</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="mc2 border-2 border-green-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-green-600">MC</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="md border-2 border-green-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-green-600">MD</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="bu1 border-2 border-red-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-red-600">BU</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="bu2 border-2 border-red-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-red-600">BU</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+
+            </section>
+        </main>
+      </div>
 
 </body>
+
 </html>
