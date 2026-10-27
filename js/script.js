@@ -33,8 +33,11 @@ function showPlayers() {
    P_name.classList.add("text-white");
    const P_post = document.createElement("p");
    P_post.classList.add("text-white")
-   P_name.textContent=data[i].name;
-   P_post.textContent=data[i].Post;
+   P_name.textContent=`name : ${data[i].name}`;
+   P_post.textContent=`Post : ${data[i].Post}`
+   const P_ID = document.createElement("span");
+   P_ID.classList.add("text-white")
+   P_ID.textContent=`ID : #${playerCard.dataset.index}`;
 
    const numero_cercle = document.createElement("div");
    numero_cercle.classList.add("flex" ,"items-center" ,"justify-center","w-10","h-10",
@@ -50,7 +53,7 @@ function showPlayers() {
    const sup_btn = document.createElement("button");
    sup_btn.classList.add("text-red-700")
    sup_btn.textContent="supprimer"
-   sup_btn.classList.add("sup-btn", "text-red-500");
+   sup_btn.classList.add("sup-btn", "text-red-400");
 
 const select = document.createElement("select");
 select.classList.add("position-select", "bg-slate-800", "text-white",
@@ -71,7 +74,8 @@ options[data[i].Post].forEach(opt => {
 });
 
 select.value = data[i].position;
-
+   info_div.appendChild
+   info_div.appendChild(P_ID)
    info_div.appendChild(P_name);
    info_div.appendChild(P_post);
    info_div.appendChild(select)
@@ -123,19 +127,72 @@ data.push({
 });
 form.reset()
 showPlayers()
-})
-const selection_menu = document.querySelector(".position-select")
+}) //
+
+
+const selection_err = document.createElement("p");
+selection_err.classList.add("text-red-500","text-center");
+asideContainer.appendChild(selection_err);
 
 asideContainer.addEventListener("change", function (event) {
+      selection_err.textContent=""
+
    if (!event.target.classList.contains("position-select")) return;
-
    const opt = event.target.value;
+   if (opt != "sur le banc") {
+   const card = event.target.closest(".player-card"); 
+   const index = Number(card.dataset.index);
+   const player = data[index].name ;
+   const PositionInFieldClass = "."+opt.toLowerCase();
+   const PositionInField = document.querySelector(PositionInFieldClass);
+   const target_P = PositionInField.querySelector(".text-sm")
+   const AllPositionsInField = document.querySelectorAll(".border-dashed") 
+   for (i of AllPositionsInField) {
+      const target = i.querySelector(".text-sm");
+      if (target.textContent.trim() === player) {
+         target.textContent="libre"
+      }
+   }
+   if (target_P.textContent === "libre") {
+   data[index].position = opt;
+   target_P.textContent=player;
+   } 
+   else { 
+      selection_err.textContent="cette position est deja occupee"
+   }
+}
+   else {
    const card = event.target.closest(".player-card");  
-   const index = Number(card.dataset.index);            
-
-   data[index].position = opt;                       
-   console.log(opt, data[index]);
-   const PositionInFieldClass = opt.toLowerCase();
-   console.log(PositionInFieldClass);
-   const PositionInField = document.querySelector()
+   const index = Number(card.dataset.index);
+   const oldPosition = data[index].position;
+   data[index].position = opt;
+   const PositionInFieldClass = "."+oldPosition.toLowerCase();
+   const PositionInField = document.querySelector(PositionInFieldClass);
+   const target_P = PositionInField.querySelector(".text-sm")
+      target_P.textContent="libre"; 
+   }
 });
+
+// function LoadTerrain() {
+//    field.querySelectorAll(".text-sm").forEach(p => p.textContent = "libre");
+
+//    data.forEach(player => {
+//       if (player.position === "sur le banc") return;
+
+//       const slot = field.querySelector("." + player.position.toLowerCase());
+//       if (!slot) return;
+
+//       slot.querySelector(".text-sm").textContent = player.name;
+//    });
+// }
+// asideContainer.addEventListener("change", function (event) {
+//    if (!event.target.classList.contains("position-select")) return;
+
+//    const card = event.target.closest(".player-card");
+//    const index = Number(card.dataset.index);
+
+//    data[index].position = event.target.value;
+
+//    renderPlayers(); 
+//    LoadTerrain();  
+// });
