@@ -1,5 +1,4 @@
-const data = []
-
+let data = JSON.parse(localStorage.getItem("playersData")) || [];
 
 // div generator
 const field = document.querySelector("section");
@@ -88,7 +87,7 @@ select.value = data[i].position;
 }
    playerCounter.textContent = data.length;
 }
-
+showPlayers();
 // input validation
 const form = document.querySelector("#ajouter-joueur");
 form.addEventListener("submit",function (event) {
@@ -125,6 +124,7 @@ data.push({
    numero: PlayerNumber.value.trim(),
    position: "sur le banc"
 });
+localStorage.setItem("playersData", JSON.stringify(data));
 form.reset()
 showPlayers()
 }) //
