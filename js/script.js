@@ -87,7 +87,9 @@ select.value = data[i].position;
 }
    playerCounter.textContent = data.length;
 }
+// show Players at startup
 showPlayers();
+
 // input validation
 const form = document.querySelector("#ajouter-joueur");
 form.addEventListener("submit",function (event) {
@@ -127,8 +129,22 @@ data.push({
 localStorage.setItem("playersData", JSON.stringify(data));
 form.reset()
 showPlayers()
-}) //
+})
 
+function restorePlayersPositionInField() {
+ const AllPositionsInField = document.querySelectorAll(".border-dashed");
+ for (let i of AllPositionsInField ){
+   const target = i.querySelector(".text-sm")
+   for (let j of data) {
+      if (i.classList.contains(j.position.toLowerCase()))
+      {
+         target.textContent=j.name ;
+      }
+   }
+} 
+}
+// restore position of players in grid at startup 
+restorePlayersPositionInField()
 
 const selection_err = document.createElement("p");
 selection_err.classList.add("text-red-500","text-center");
@@ -147,7 +163,7 @@ asideContainer.addEventListener("change", function (event) {
    const PositionInField = document.querySelector(PositionInFieldClass);
    const target_P = PositionInField.querySelector(".text-sm")
    const AllPositionsInField = document.querySelectorAll(".border-dashed") 
-   for (i of AllPositionsInField) {
+   for (let i of AllPositionsInField) {
       const target = i.querySelector(".text-sm");
       if (target.textContent.trim() === player) {
          target.textContent="libre"
@@ -155,6 +171,7 @@ asideContainer.addEventListener("change", function (event) {
    }
    if (target_P.textContent === "libre") {
    data[index].position = opt;
+   localStorage.setItem("playersData", JSON.stringify(data));
    target_P.textContent=player;
    } 
    else { 
@@ -166,9 +183,15 @@ asideContainer.addEventListener("change", function (event) {
    const index = Number(card.dataset.index);
    const oldPosition = data[index].position;
    data[index].position = opt;
+   localStorage.setItem("playersData", JSON.stringify(data));
+   if (oldPosition !== "sur le banc") {
    const PositionInFieldClass = "."+oldPosition.toLowerCase();
    const PositionInField = document.querySelector(PositionInFieldClass);
    const target_P = PositionInField.querySelector(".text-sm")
       target_P.textContent="libre"; 
    }
+   }
 });
+
+// supprimer :
+// const supprimer = document.querySelector("sup_btn");
