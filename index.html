@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Créez et gérez vos compositions d'équipe facilement sur Tachkila. Organisez votre effectif, placez vos joueurs en 4-4-2 sur un terrain virtuel et partagez votre tactique.">
     <title>Tachkila - Créez et Gérez votre Composition d'Équipe de Foot</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="js/script.js" defer></script>
 </head>
 <body>
-    <header class="flex items-center justify-between px-4 py-4 bg-teal-950" >
+    <header class="flex items-center justify-between px-4 py-4 bg-cyan-900" >
         <div class="flex items-center gap-3">
         <img src="assets/football.png" alt="Football Icon" class="h-8 w-8 object-contain shrink-0"/>
         <span class="font-bold text-lime-400 tracking-wide uppercase">TACHKILA</span>
@@ -38,34 +40,148 @@
         <span class="text-white border-2 border-blue-500 rounded-lg bg-slate-900 p-1">4-4-2</span>
         </div>
     </header>
-    <main>
-        <aside class="flex-row bg-teal-900 h-[500px] w-[300px]">
-        <button type="button" class="bg-blue-600
+    <div class="flex min-h-screen">
+
+        <aside class="flex-row bg-sky-950 h-screen w-[300px]">
+        <button type="button" id="openBtn" class="bg-blue-600
         text-white rounded-lg px-4 text-center py-2 h-[60px] w-[280px]
-        text-base font-semibold my-4 mx-2">+ Ajouter un joueur</button>
+        text-base font-semibold my-4 mx-2 ">+ Ajouter un joueur</button>
         <div class="flex justify-between m-[10px] items-center">
-            <h3 class="text-white font-bold">Effectif</h3> 
+            <h3 class="text-white font-bold">Effectif</h3>
             <div class="border-[1px] border-teal-900 bg-teal-950 text-white rounded-lg p-1.5 text-sm">
-                <span>1</span><span> joueur(s)</span>
+              <span id="player-count">0</span><span> joueur(s)</span>
             </div>
         </div>
-        <p></p>
         </aside>
-        <section>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </section>
-    </main>
+
+        <main class="flex justify-center items-center flex-1 bg-slate-900">
+            <section>
+
+                <div class="gb border-2 border-amber-400 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-amber-400">GB</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+
+                <div class="dc1 border-2 border-blue-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-blue-600">DC</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+
+                <div class="dc2 border-2 border-blue-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-blue-600">DC</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="dg border-2 border-blue-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-blue-600">DG</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="dd border-2 border-blue-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-blue-600">DD</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="mg border-2 border-green-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-green-600">MG</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="mc1 border-2 border-green-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-green-600">MC</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="mc2 border-2 border-green-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-green-600">MC</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="md border-2 border-green-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-green-600">MD</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="bu1 border-2 border-red-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-red-600">BU</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+              <div class="bu2 border-2 border-red-600 border-dashed 
+                bg-slate-800 rounded-lg flex items-center justify-center gap-8">
+                <div class="text-center">
+                <p class="font-semibold text-base text-red-600">BU</p>
+                <p class="text-sm text-gray-500">libre</p>
+                </div>
+              </div>
+            </section>
+        </main>
+      <div id="Modal-Ajout-overlay" class="fixed flex inset-0 backdrop-blur-sm z-50 justify-center p-4 hidden">
+        <div id="modal-box" class="bg-slate-700 rounded-lg max-w-md w-full h-[500px] p-6 border-2 border-blue-600">
+            <h2 class="text-xl font-semibold text-white mb-4">Ajouter un joueur</h2>
+            <form id="ajouter-joueur">
+              <div class="form-group">
+              <label for="name" class="text-white text-base">Nom complet du joueur :</label>
+              <input type="text" id="name" name="nom-complet" class="text-white px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-slate-800" required>
+              <p id="name-err-msg" class="text-red-500"></p>
+              </div>
+              <div class="form-group mt-6">
+              <p class="text-white"><strong>Poste : </strong></p>
+              <label class="text-yellow-500">
+                <input class="mr-1" type="radio" name="poste" value="gardien" required>Gardien
+              </label><br>
+              <label class="text-blue-600">
+                <input class="mr-1" type="radio" name="poste" value="defenseur" required>Defenseur
+              </label><br>
+              <label class="text-green-400">
+                <input class="mr-1" type="radio" name="poste" value="milieu" required>Milieu
+              </label><br>
+              <label class="text-red-500">
+                <input class="mr-1" type="radio" name="poste" value="attaquant" required>Attaquant
+              </label>
+              </div>
+              <div class="form-group mt-6">
+              <label for="numero" class=" text-white rounded-lg w-full"> Numero (1-99) :</label>
+              <input type="number" name="numero" id="numero" class=" bg-slate-800 px-3 py-2 text-white border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+              <p id="number-err-msg" class="text-red-500"></p>
+              </div>
+                <div class="flex justify-end gap-3 pt-2 mt-4">
+                  <button type="button" id="closeBtn" 
+                          class="px-4 py-2 border border-gray-300 rounded-md 
+                          text-white hover:bg-gray-50 transition">Annuler
+                  </button>
+                  <button type="submit" 
+                          class="px-4 py-2 bg-blue-600 hover:bg-blue-700
+                           text-white rounded-md transition font-medium">Ajouter
+                  </button>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
 
 </body>
+
 </html>
