@@ -131,6 +131,7 @@ form.reset()
 showPlayers()
 })
 
+// restore position of players in grid at startup :
 function restorePlayersPositionInField() {
  const AllPositionsInField = document.querySelectorAll(".border-dashed");
  for (let i of AllPositionsInField ){
@@ -143,7 +144,6 @@ function restorePlayersPositionInField() {
    }
 } 
 }
-// restore position of players in grid at startup 
 restorePlayersPositionInField()
 
 const selection_err = document.createElement("p");
@@ -194,4 +194,16 @@ asideContainer.addEventListener("change", function (event) {
 });
 
 // supprimer :
-// const supprimer = document.querySelector("sup_btn");
+asideContainer.addEventListener("click", function (event) {
+   if (!event.target.classList.contains("sup-btn")) return;
+   const card = event.target.closest(".player-card");
+   const index = Number(card.dataset.index);
+   const player = data[index];
+   if (player.position !== "sur le banc") {
+      const slot = document.querySelector("." + player.position.toLowerCase());
+      slot.querySelector(".text-sm").textContent = "libre";
+   }
+   data.splice(index, 1);
+   localStorage.setItem("playersData", JSON.stringify(data));
+   showPlayers();
+});
