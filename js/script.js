@@ -172,27 +172,3 @@ asideContainer.addEventListener("change", function (event) {
       target_P.textContent="libre"; 
    }
 });
-
-// function LoadTerrain() {
-//    field.querySelectorAll(".text-sm").forEach(p => p.textContent = "libre");
-
-//    data.forEach(player => {
-//       if (player.position === "sur le banc") return;
-
-//       const slot = field.querySelector("." + player.position.toLowerCase());
-//       if (!slot) return;
-
-//       slot.querySelector(".text-sm").textContent = player.name;
-//    });
-// }
-// asideContainer.addEventListener("change", function (event) {
-//    if (!event.target.classList.contains("position-select")) return;
-
-//    const card = event.target.closest(".player-card");
-//    const index = Number(card.dataset.index);
-
-//    data[index].position = event.target.value;
-
-//    renderPlayers(); 
-//    LoadTerrain();  
-// });
