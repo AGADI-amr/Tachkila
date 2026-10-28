@@ -89,9 +89,23 @@ select.value = data[i].position;
 }
 // show Players at startup
 showPlayers();
+// modify EventListener :  
+asideContainer.addEventListener("click", function (event) {
+   if (!event.target.classList.contains("mod-btn")) return;
 
-// input validation
+   const card = event.target.closest(".player-card");
+   modIndex = Number(card.dataset.index)
+   const player = data[modIndex];
+   document.querySelector("#name").value = player.name;
+   document.querySelector("#numero").value = player.numero;
+   document.querySelector(`input[name='poste'][value='${player.Post}']`).checked = true;
+   myModal.classList.remove("hidden");
+
+})
+//adding player & input validation & modify :
+let modIndex = null;
 const form = document.querySelector("#ajouter-joueur");
+
 form.addEventListener("submit",function (event) {
    event.preventDefault();
 const PlayerName = document.querySelector("input[type='text']");
@@ -119,17 +133,38 @@ if (!NumRgex.test(PlayerNumber.value.trim())) {
    valid = false;
 }
 if (!valid) return;
-
+if (modIndex === null) {
 data.push({
    name: PlayerName.value.trim(),
    Post: postIsChecked.value,
    numero: PlayerNumber.value.trim(),
    position: "sur le banc"
-});
+}); 
+}
+else {
+const player = data[modIndex];
+  if (player.Post !== postIsChecked.value) {
+      if (player.position !== "sur le banc") {
+         const PositionInField = document.querySelector("." + player.position.toLowerCase());
+         PositionInField.querySelector(".text-sm").textContent = "libre";
+      }
+   player.position = "sur le banc"; 
+   }
+   player.name = PlayerName.value.trim();
+   player.Post = postIsChecked.value;
+   player.numero = PlayerNumber.value.trim();
+
+   editIndex = null;
+}
 localStorage.setItem("playersData", JSON.stringify(data));
 form.reset()
 showPlayers()
 })
+closeBtn.addEventListener('click', () => {
+   myModal.classList.add("hidden");
+   editIndex = null;
+   form.reset();
+});
 
 // restore position of players in grid at startup :
 function restorePlayersPositionInField() {
@@ -151,9 +186,9 @@ selection_err.classList.add("text-red-500","text-center");
 asideContainer.appendChild(selection_err);
 
 asideContainer.addEventListener("change", function (event) {
-      selection_err.textContent=""
 
    if (!event.target.classList.contains("position-select")) return;
+   selection_err.textContent=""
    const opt = event.target.value;
    if (opt != "sur le banc") {
    const card = event.target.closest(".player-card"); 
