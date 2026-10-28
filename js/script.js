@@ -87,9 +87,25 @@ select.value = data[i].position;
 }
    playerCounter.textContent = data.length;
 }
+// show Players at startup
 showPlayers();
-// input validation
+// modify EventListener :  
+asideContainer.addEventListener("click", function (event) {
+   if (!event.target.classList.contains("mod-btn")) return;
+
+   const card = event.target.closest(".player-card");
+   modIndex = Number(card.dataset.index)
+   const player = data[modIndex];
+   document.querySelector("#name").value = player.name;
+   document.querySelector("#numero").value = player.numero;
+   document.querySelector(`input[name='poste'][value='${player.Post}']`).checked = true;
+   myModal.classList.remove("hidden");
+
+})
+//adding player & input validation & modify :
+let modIndex = null;
 const form = document.querySelector("#ajouter-joueur");
+
 form.addEventListener("submit",function (event) {
    event.preventDefault();
 const PlayerName = document.querySelector("input[type='text']");
@@ -117,25 +133,61 @@ if (!NumRgex.test(PlayerNumber.value.trim())) {
    valid = false;
 }
 if (!valid) return;
-
+if (modIndex === null) {
 data.push({
    name: PlayerName.value.trim(),
    Post: postIsChecked.value,
    numero: PlayerNumber.value.trim(),
    position: "sur le banc"
-});
+}); 
+showSuccess("Joueur ajouté avec succès")
+}
+else {
+const player = data[modIndex];
+  if (player.Post !== postIsChecked.value) {
+      if (player.position !== "sur le banc") {
+         const PositionInField = document.querySelector("." + player.position.toLowerCase());
+         PositionInField.querySelector(".text-sm").textContent = "libre";
+      }
+   player.position = "sur le banc"; 
+   }
+   player.name = PlayerName.value.trim();
+   player.Post = postIsChecked.value;
+   player.numero = PlayerNumber.value.trim();
+
+   editIndex = null;
+   showSuccess("Joueur modifié avec succès");
+}
 localStorage.setItem("playersData", JSON.stringify(data));
 form.reset()
 showPlayers()
-}) //
+})
+closeBtn.addEventListener('click', () => {
+   myModal.classList.add("hidden");
+   editIndex = null;
+   form.reset();
+});
 
+// restore position of players in grid at startup :
+function restorePlayersPositionInField() {
+ const AllPositionsInField = document.querySelectorAll(".border-dashed");
+ for (let i of AllPositionsInField ){
+   const target = i.querySelector(".text-sm")
+   for (let j of data) {
+      if (i.classList.contains(j.position.toLowerCase()))
+      {
+         target.textContent=j.name ;
+      }
+   }
+} 
+}
+restorePlayersPositionInField()
 
 const selection_err = document.createElement("p");
 selection_err.classList.add("text-red-500","text-center");
 asideContainer.appendChild(selection_err);
 
 asideContainer.addEventListener("change", function (event) {
-      selection_err.textContent=""
 
    if (!event.target.classList.contains("position-select")) return;
    const opt = event.target.value;
@@ -147,7 +199,7 @@ asideContainer.addEventListener("change", function (event) {
    const PositionInField = document.querySelector(PositionInFieldClass);
    const target_P = PositionInField.querySelector(".text-sm")
    const AllPositionsInField = document.querySelectorAll(".border-dashed") 
-   for (i of AllPositionsInField) {
+   for (let i of AllPositionsInField) {
       const target = i.querySelector(".text-sm");
       if (target.textContent.trim() === player) {
          target.textContent="libre"
@@ -155,10 +207,12 @@ asideContainer.addEventListener("change", function (event) {
    }
    if (target_P.textContent === "libre") {
    data[index].position = opt;
+   localStorage.setItem("playersData", JSON.stringify(data));
    target_P.textContent=player;
    } 
    else { 
       selection_err.textContent="cette position est deja occupee"
+      setTimeout(() => selection_err.textContent = "", 3000);
    }
 }
    else {
@@ -166,9 +220,37 @@ asideContainer.addEventListener("change", function (event) {
    const index = Number(card.dataset.index);
    const oldPosition = data[index].position;
    data[index].position = opt;
+   localStorage.setItem("playersData", JSON.stringify(data));
+   if (oldPosition !== "sur le banc") {
    const PositionInFieldClass = "."+oldPosition.toLowerCase();
    const PositionInField = document.querySelector(PositionInFieldClass);
    const target_P = PositionInField.querySelector(".text-sm")
       target_P.textContent="libre"; 
    }
+   }
 });
+
+// supprimer :
+asideContainer.addEventListener("click", function (event) {
+   if (!event.target.classList.contains("sup-btn")) return;
+   const card = event.target.closest(".player-card");
+   const index = Number(card.dataset.index);
+   const player = data[index];
+   if (!confirm(`Voulez-vous vraiment supprimer ${player.name} ?`)) return;
+   if (player.position !== "sur le banc") {
+      const slot = document.querySelector("." + player.position.toLowerCase());
+      slot.querySelector(".text-sm").textContent = "libre";
+   }
+   data.splice(index, 1);
+   localStorage.setItem("playersData", JSON.stringify(data));
+   showPlayers();
+   showSuccess("Joueur supprimé");
+});
+
+const successMsg = document.querySelector("#success-msg");
+
+function showSuccess(message) {
+   successMsg.textContent = message;
+   successMsg.classList.remove("hidden");
+   setTimeout(() => successMsg.classList.add("hidden"), 3000);
+}
