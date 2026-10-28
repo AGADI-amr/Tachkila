@@ -12,4 +12,8 @@ Tachkila is a web application designed to help football coaches manage their tea
 - **Tailwind CSS:** Building a responsive and user-friendly interface.
 - **Problem-Solving:** Applying business rules to ensure player-position compatibility and prevent invalid assignments.
 
-Plannification : https://aamr-el-gadiri.atlassian.net/jira/software/projects/KAN/boards/1?filter=assignee+IN+%28712020%3A18100bef-5c76-4c83-b846-e73c0771e0aa%2C+empty%29&groupBy=none&atlOrigin=eyJpIjoiODk1Zjk0NzM1ZWQyNGM5ZWEwZjI3OWYxOGFmODQ1NjgiLCJwIjoiaiJ9
+### Plannification : 
+https://aamr-el-gadiri.atlassian.net/jira/software/projects/KAN/boards/1?filter=assignee+IN+%28712020%3A18100bef-5c76-4c83-b846-e73c0771e0aa%2C+empty%29&groupBy=none&atlOrigin=eyJpIjoiODk1Zjk0NzM1ZWQyNGM5ZWEwZjI3OWYxOGFmODQ1NjgiLCJwIjoiaiJ9
+
+### Presentation : 
+https://canva.link/7obnw7g8k6aj8oa
