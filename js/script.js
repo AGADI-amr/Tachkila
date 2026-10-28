@@ -140,6 +140,7 @@ data.push({
    numero: PlayerNumber.value.trim(),
    position: "sur le banc"
 }); 
+showSuccess("Joueur ajouté avec succès")
 }
 else {
 const player = data[modIndex];
@@ -155,6 +156,7 @@ const player = data[modIndex];
    player.numero = PlayerNumber.value.trim();
 
    editIndex = null;
+   showSuccess("Joueur modifié avec succès");
 }
 localStorage.setItem("playersData", JSON.stringify(data));
 form.reset()
@@ -188,7 +190,6 @@ asideContainer.appendChild(selection_err);
 asideContainer.addEventListener("change", function (event) {
 
    if (!event.target.classList.contains("position-select")) return;
-   selection_err.textContent=""
    const opt = event.target.value;
    if (opt != "sur le banc") {
    const card = event.target.closest(".player-card"); 
@@ -211,6 +212,7 @@ asideContainer.addEventListener("change", function (event) {
    } 
    else { 
       selection_err.textContent="cette position est deja occupee"
+      setTimeout(() => selection_err.textContent = "", 3000);
    }
 }
    else {
@@ -234,6 +236,7 @@ asideContainer.addEventListener("click", function (event) {
    const card = event.target.closest(".player-card");
    const index = Number(card.dataset.index);
    const player = data[index];
+   if (!confirm(`Voulez-vous vraiment supprimer ${player.name} ?`)) return;
    if (player.position !== "sur le banc") {
       const slot = document.querySelector("." + player.position.toLowerCase());
       slot.querySelector(".text-sm").textContent = "libre";
@@ -241,4 +244,13 @@ asideContainer.addEventListener("click", function (event) {
    data.splice(index, 1);
    localStorage.setItem("playersData", JSON.stringify(data));
    showPlayers();
+   showSuccess("Joueur supprimé");
 });
+
+const successMsg = document.querySelector("#success-msg");
+
+function showSuccess(message) {
+   successMsg.textContent = message;
+   successMsg.classList.remove("hidden");
+   setTimeout(() => successMsg.classList.add("hidden"), 3000);
+}
